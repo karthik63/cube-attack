@@ -1,2 +1,1 @@
-# cube-attack
-simulation of a cryptographic cube attack
+coming soon
