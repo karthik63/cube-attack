@@ -58,11 +58,11 @@ class CubeAttack:
 
         assign_strings = []
 
-        for i in range(80):
+        for i in range(min(2 ** self.degree - 1,80)):
 
             assign_string = format(i, 'b')
 
-            while len(assign_string) != 80:
+            while len(assign_string) != self.degree:
                 assign_string = '0' + assign_string
 
             assign_strings.append(assign_string)
@@ -76,7 +76,7 @@ class CubeAttack:
         n_checked = 0
 
         for i,assign_string in enumerate(assign_strings):
-            print("haha ", n_checked)
+            # print("constant check ", n_checked)
 
             n_checked += 1
 
@@ -114,7 +114,7 @@ class CubeAttack:
 
         for assign1 in assign_strings:
             for assign2 in assign_strings:
-                print("l ", n_checked)
+                # print("linear check ", n_checked)
                 logging.debug('assign1: ' + assign1)
                 logging.debug('assign2: ' + assign2)
 

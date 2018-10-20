@@ -13,8 +13,3 @@ class TriviumCubeAttack(cube_attack.CubeAttack):
         self.bbpoly = Trivium(n_rounds)
         self.action = action
 
-
-f = TriviumCubeAttack(672)
-
-print(f.test_maxterm("v2v13v20v24v37v42v43v46v53v55v57v67", 675))
-

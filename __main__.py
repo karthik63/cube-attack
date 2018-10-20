@@ -17,6 +17,8 @@ def main():
 
     elif args.mode=="trivium":
 
-        ca = TriviumCubeAttack(args.n_rounds)
+        f = TriviumCubeAttack(args.n_rounds)
+
+        print(f.test_maxterm("v2v13v20v24v37v42v43v46v53v55v57v67", 675))
 
 main()

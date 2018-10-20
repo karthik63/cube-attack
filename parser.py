@@ -3,7 +3,7 @@ import argparse
 class Parser():
     def __init__(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument("--mode", default="trivium", choices=["random, trivium"],
+        parser.add_argument("--mode", default="random", choices=["random, trivium"],
                             help="What polynomial to perform the attack on ?\
                                   a random polynomial or trivium ?")
 

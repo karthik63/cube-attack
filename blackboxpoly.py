@@ -7,7 +7,6 @@ b.evaluate(assignment)
 b.evalonline(assignment)
 """
 import numpy as np
-<<<<<<< HEAD
 import re
 import logging
 
@@ -16,10 +15,8 @@ seed = np.random.randint(0, 1000)
 logging.info("Seed is {}".format(seed))
 
 np.random.seed(seed)
-=======
 
 #np.random.seed(1234)
->>>>>>> 489fc60d422f0d5722bbe59a7ae8492ed0d06b16
 
 def sum_mod2(a,b):
     return (a+b) % 2
@@ -29,10 +26,7 @@ class BlackBoxPoly:
     def __init__(self, degree=3):
 
         self.degree = degree
-<<<<<<< HEAD
-=======
 
->>>>>>> 489fc60d422f0d5722bbe59a7ae8492ed0d06b16
         self.publicvariables = []
         self.secretvariables = []
 
@@ -66,27 +60,24 @@ class BlackBoxPoly:
 
         self.maxterms.append('constant')
 
-<<<<<<< HEAD
         random_array = np.random.choice(2, [2**(self.degree*2)], p=[0.8, 0.2])
 
         k=0
 
         self.coefficients = {}
 
-=======
+
         random_array = np.random.randint(0, 2, [2**(self.degree*2)])
         
         k=0
         
         self.coefficients = {}
-        
->>>>>>> 489fc60d422f0d5722bbe59a7ae8492ed0d06b16
+
         for maxterm in self.maxterms:
             self.coefficients[maxterm] = random_array[k]
             k += 1
 
         self.private_key = np.random.randint(0, 2, degree)
-<<<<<<< HEAD
 
         debug_string = ""
 
@@ -98,11 +89,7 @@ class BlackBoxPoly:
         logging.info("The eqn is " + debug_string)
         logging.info("The private key is " + str(self.private_key))
 
-    def evaluate(self, assignment_dict, index=None):
-=======
-        # print(self.private_key, " prk")
-
-    def evaluate(self, assignment):
+    def evaluate(self, assignment, index=None):
 
         # public_assignment = {}
         # private_assignment = {}
@@ -138,8 +125,6 @@ class BlackBoxPoly:
         return self.evalonline(assignment)
 
     def evalonline(self, assignment_dict):
->>>>>>> 489fc60d422f0d5722bbe59a7ae8492ed0d06b16
-
         public_assignment = {}
         private_assignment = {}
 
@@ -169,7 +154,6 @@ class BlackBoxPoly:
             temp_ans = 1
 
             for pbv in public_assignment.keys():
-<<<<<<< HEAD
                 # logging.debug(maxterm + ' iiii ' + pbv)
 
                 if re.match('([xv0-9]*' + pbv + '$)|([xv0-9]*' + pbv + '[xv])', maxterm):
@@ -180,18 +164,15 @@ class BlackBoxPoly:
                 if re.match('([xv0-9]*' + prv + '$)|([xv0-9]*' + prv + '[xv])', maxterm):
                     temp_ans *= private_assignment[prv]
 
-            ans = sum_mod2(ans, temp_ans)
-
-=======
-                if pbv in maxterm:
-                    temp_ans *= public_assignment[pbv]
+            if pbv in maxterm:
+                temp_ans *= public_assignment[pbv]
 
             for prv in private_assignment.keys():
                 if prv in maxterm:
                     temp_ans *= private_assignment[prv]
 
             ans = sum_mod2(ans, temp_ans)
->>>>>>> 489fc60d422f0d5722bbe59a7ae8492ed0d06b16
+
         return ans
 
 
