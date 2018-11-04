@@ -3,11 +3,11 @@ import argparse
 class Parser():
     def __init__(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument("--mode", default="random", choices=["random, trivium"],
+        parser.add_argument("--mode", default="random", choices=["random", "trivium"],
                             help="What polynomial to perform the attack on ?\
                                   a random polynomial or trivium ?")
 
-        parser.add_argument("--action", default="verify", choices=["verify, attack"],
+        parser.add_argument("--action", default="verify", choices=["verify", "attack"],
                             help="verify trivium maxterms or perform cube attack on trivium ?")
 
         parser.add_argument("--n_rounds", default=672, type=int,
