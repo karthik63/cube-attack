@@ -5,7 +5,8 @@ logging.basicConfig(level=logging.INFO)
 from blackboxpoly import BlackBoxPoly
 from blackboxpoly import sum_mod2
 
-class CubeAttack:
+
+class CubeAttack(object):
 
     def __init__(self, degree=3, mode="random"):
 
