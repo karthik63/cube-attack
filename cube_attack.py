@@ -1,7 +1,7 @@
 import numpy as np
 import re
 import logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 from blackboxpoly import BlackBoxPoly
 from blackboxpoly import sum_mod2
 
@@ -24,7 +24,7 @@ class CubeAttack(object):
         if not private_assignment:
             private_assignment = {}
 
-        logging.debug("iterating cubically " + maxterm + " " + str(private_assignment))
+        # logging.debug("iterating cubically " + maxterm + " " + str(private_assignment))
 
         n_terms = maxterm.count('v')
 
@@ -44,7 +44,7 @@ class CubeAttack(object):
             for j, term in enumerate(terms):
                 assignment['v' + term] = int(assign_string[j])
 
-            logging.debug(assignment)
+            # logging.debug(assignment)
 
             answer = sum_mod2(self.bbpoly.evaluate(assignment, self.index_to_take), answer)
 
@@ -76,8 +76,8 @@ class CubeAttack(object):
 
         n_checked = 0
 
-        for i,assign_string in enumerate(assign_strings):
-            # print("constant check ", n_checked)
+        for i, assign_string in enumerate(assign_strings):
+            logging.debug("constant check " + str(n_checked))
 
             n_checked += 1
 
@@ -115,7 +115,11 @@ class CubeAttack(object):
 
         for assign1 in assign_strings:
             for assign2 in assign_strings:
-                # print("linear check ", n_checked)
+
+                if assign1 == assign2:
+                    continue
+
+                logging.debug("linear check "+ str(n_checked))
                 logging.debug('assign1: ' + assign1)
                 logging.debug('assign2: ' + assign2)
 
@@ -141,14 +145,14 @@ class CubeAttack(object):
                 ans_3 = self.iterate_cubically(maxterm, current_assignment)
 
                 lhs = sum_mod2(sum_mod2(ans_1, ans_2), ans_3)
-                logging.debug('lhs: ' +  str(lhs))
+                # logging.debug('lhs: ' +  str(lhs))
 
                 rhs_argument = format(int(assign1, 2) ^ int(assign2, 2), 'b')
 
                 while len(rhs_argument) != self.degree:
                     rhs_argument = '0' + rhs_argument
 
-                logging.debug('rhs argument: ' + str(rhs_argument))
+                # logging.debug('rhs argument: ' + str(rhs_argument))
 
                 current_assignment = {}
 
@@ -157,14 +161,14 @@ class CubeAttack(object):
 
                 rhs = self.iterate_cubically(maxterm, current_assignment)
 
+                if n_checked >= 80:
+                    break
+
                 if lhs != rhs:
                     linear = False
                     break
 
                 n_checked += 1
-
-                if n_checked >= 80:
-                    break
 
             if not linear:
                 break

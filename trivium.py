@@ -40,9 +40,9 @@ class Trivium:
 
         logging.info("private key (hex) is %s", sk_hex)
 
-    def _init_trivium(self, iv):
+    def _init_trivium(self, iv, sk_list):
 
-        init_list = list(map(int, list(self.sk_list)))
+        init_list = list(map(int, list(sk_list)))
         init_list += list(repeat(0, 13))
 
         # len 84
@@ -77,7 +77,7 @@ class Trivium:
         pub_binary = "".join([str(public_assignment['v'+str(z)]) for z in range(1, 81)])
         pri_binary = "".join([str(private_assignment['x'+str(z)]) for z in range(1, 81)])
 
-        self._init_trivium(pub_binary)
+        self._init_trivium(pub_binary, pri_binary)
 
         for i in range(out_bit - self.n_rounds):
             self._gen_keystream()

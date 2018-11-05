@@ -3,12 +3,9 @@ import argparse
 class Parser():
     def __init__(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument("--mode", default="random", choices=["random", "trivium"],
+        parser.add_argument("--mode", default="trivium", choices=["random", "trivium"],
                             help="What polynomial to perform the attack on ?\
                                   a random polynomial or trivium ?")
-
-        parser.add_argument("--action", default="verify", choices=["verify", "attack"],
-                            help="verify trivium maxterms or perform cube attack on trivium ?")
 
         parser.add_argument("--n_rounds", default=672, type=int,
                             help="number of initialisation rounds for trivium ?")
@@ -16,8 +13,8 @@ class Parser():
         parser.add_argument("--degree", default=3, type=int,
                             help="If mode is random, specify the degree of \
                                   the polynomial. Ignored in the case of trivium")
-
-        parser.add_argument("--private_key", default="-1", help="private key of the scheme if random")
+        #
+        # parser.add_argument("--private_key", default="-1", help="private key of the scheme if random")
 
         self.parser = parser
 
